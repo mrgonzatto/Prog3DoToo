@@ -19,7 +19,36 @@
 
         <Button Text="Filtrar" />
 
-        <ListView Grid.Row="1">
+        <ListView Grid.Row="1" RowHeight="70" ItemsSource="{Binding Items}">
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+
+                        <Grid Padding="15,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="10" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <BoxView Grid.RowSpan="2" />
+                            <Label Grid.Column="1" 
+                                   Text="{Binding Item.Title}" 
+                                   FontSize="Large" />
+                            <Label Grid.Column="1" 
+                                   Text="{Binding Item.Due}" 
+                                   Grid.Row="1" 
+                                   FontSize="Micro" />
+                            <Label Grid.Column="1" 
+                                   Grid.Row="1" 
+                                   HorizontalTextAlignment="End" 
+                                   Text="Finalizado" 
+                                   IsVisible="{Binding Item.Completed}"
+                                   FontSize="Micro" />
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
             
         </ListView>
     </Grid>
