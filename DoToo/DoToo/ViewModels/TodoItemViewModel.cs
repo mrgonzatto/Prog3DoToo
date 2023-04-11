@@ -1,5 +1,7 @@
 ﻿using DoToo.Models;
 using System;
+using System.Windows.Input;
+using Xamarin.Forms;
 using System.Collections.Generic;
 using System.Text;
 
@@ -15,7 +17,7 @@ namespace DoToo.ViewModels
 
         public string StatusText => 
             (Item.Completed ? "Reativar" : "Completo");
-    
+
         /* A instrução acima é a mesma coisa que esta
          * Só que está com notação funcional => (LAMBDA)
         public string StatusText()
@@ -27,5 +29,12 @@ namespace DoToo.ViewModels
         }
         */
 
+        public ICommand ToggleCompleted => new Command(
+            (arg) => { 
+                Item.Completed = !Item.Completed;
+                ItemStatusChanged?.Invoke(this, new EventArgs());
+            }
+        );
+        
     }
 }

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SQLite;
 using System.IO;
+using System.Linq;
 
 namespace DoToo.Repositories
 {
@@ -68,6 +69,27 @@ namespace DoToo.Repositories
         {
             await CreateConnection();
             return await connection.Table<TodoItem>().ToListAsync();
+        }
+
+        public async Task<List<TodoItem>> GetItems(
+            DateTime dtInicio, DateTime dtFim
+        )
+        {
+            await CreateConnection();
+            return await connection.Table<TodoItem>()
+                            .Where(w => w.Due >= dtInicio && w.Due <= dtFim)
+                            .ToListAsync();
+        }
+
+        public async Task<List<TodoItem>> GetItems(
+            DateTime dtInicio, DateTime dtFim, bool concluido
+        )
+        {
+            await CreateConnection();
+            return await connection.Table<TodoItem>()
+                            .Where(w => w.Due >= dtInicio && w.Due <= dtFim)
+                            .Where(w => w.Completed == concluido)
+                            .ToListAsync();
         }
 
         public async Task UpdateItem(TodoItem item)
