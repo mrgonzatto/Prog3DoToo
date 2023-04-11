@@ -33,9 +33,7 @@ namespace DoToo.ViewModels
             get { return null; }
             set 
             { 
-                Device.BeginInvokeOnMainThread(
-                    async () => await NavigateToItem(value)
-                );
+                Device.BeginInvokeOnMainThread( async () => await NavigateToItem(value) );
                 RaisePropertyChanged( nameof(SelectedItem) );
             }
         }
@@ -43,7 +41,9 @@ namespace DoToo.ViewModels
         private async Task NavigateToItem(TodoItemViewModel item)
         {
             if (item == null)
+            {
                 return;
+            }
 
             var itemView = Resolver.Resolve<ItemView>();
             // vm é a ViewModel

@@ -46,8 +46,12 @@
             
         </Button>
 
-            <ListView x:Name="ItemsListView" SelectedItem="{Binding SelectedItem}"
-            Grid.Row="1" RowHeight="70" ItemsSource="{Binding Items}">
+            <ListView 
+                x:Name="ItemsListView" 
+                SelectedItem="{Binding SelectedItem}"
+                Grid.Row="1" 
+                RowHeight="70" 
+                ItemsSource="{Binding Items}">
 
             <ListView.ItemTemplate>
                 <DataTemplate>
